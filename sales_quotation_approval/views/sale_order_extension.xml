@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+                 
+        <record id="quoatation_appr" model="ir.ui.view">
+            <field name="name">sale.order.form.approve</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                    <button name="action_quotation_send" position="before">
+                        <button name="action_quotation_approve" string="Approve" states="draft"
+                            type="object" class="oe_highlight" groups="sales_quotation_approval.quotation_approval_grp"/>
+                    </button>
+                    <!--  modify the first button: add new status: quotation_approved -->
+  
+                     <xpath expr="//button[@name='action_quotation_send']" position="attributes"> 
+                       <attribute name="states">draft,quotation_approved</attribute>
+                     </xpath>
+                    
+                     <!-- modify the first button: only show this button is state approved, in draft is wont be shown
+                     -->
+                     
+                     <xpath expr="//button[@name='action_confirm']" position="attributes"> 
+                       <attribute name="states">draft,quotation_approved</attribute>
+                     </xpath>
+                    
+                    <button name="action_cancel" position="attributes">
+                        <attribute name="states">draft,quotation_approved,sent</attribute>
+                    </button>
+                    
+                    <button name="print_quotation" position="attributes">
+                        <attribute name="states">quotation_approved,sent,progress,manual</attribute>
+                    </button>
+                    <field name="state" position="attributes">
+                        <attribute name="statusbar_visible">draft,quotation_approved,sent,progress,done</attribute>
+                    </field>  
+                    
+                    <!-- remove the button: Approve and Confirm created from interface
+                     <button name="button_approve" position="replace">
+                    </button>   -->
+            </field>
+        </record> 
+    </data>
+</openerp>

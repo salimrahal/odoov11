@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+  
+       <!-- a group who can approve on quotation -->
+         <record id="quotation_approval_grp" model="res.groups">
+            <field name="name">Approve Quotation</field>
+        </record> 
+        
+  </data>
+</openerp>
